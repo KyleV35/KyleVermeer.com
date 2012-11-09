@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Whoops!{% endblock %}
+{% block head %} {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/family.css" />
+{% endblock %}
+{% block content %}
+    <p class="black_text">Whoops! Something went wrong on our end!</p>
+    <img class="center" src="/static/images/Sad500Man.png" alt="500 image"/>
+{% endblock %}

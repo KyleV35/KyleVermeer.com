@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Page Not Found!{% endblock %}
+{% block head %} {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/family.css" />
+{% endblock %}
+{% block content %}
+    <p class="black_text">This page does not exist!</p>
+    <img class="center" src="/static/images/QuestionMark.png"/>
+{% endblock %}

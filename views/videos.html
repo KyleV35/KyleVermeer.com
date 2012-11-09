@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Videos for {{familyMember.first_name}}{% endblock %}
+{% block head %} {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/family.css" />
+{% endblock %}
+{% block content %}
+    <h1 id="title" class="pad_left"> Videos for {{ familyMember.first_name + ' ' + familyMember.last_name }}:</h1>
+    <a class="black_text pad_left" href="/family/member/{{ familyMember.normalized_name }}">Back to Grant's profile!</a>
+    {% for video in videos %}
+        <iframe class="video" width="560" height="315" src="http://www.youtube.com/embed/{{video.youtube_id}}" frameborder="0" allowfullscreen></iframe>
+        <div class="video_info">
+            <span class="likes_display">Likes: {{ video.likes }} </span>
+            <button class="like_button" type="button" videoID="{{ video.youtube_id }}"><img src="/static/images/LikeButton.png" alt="Like Button"/></button>
+        </div>
+    {% endfor %}
+{% endblock %}
+{% block footer %} {{ super() }}
+    <script src="/static/javascripts/likes.js"></script>
+{% endblock %}

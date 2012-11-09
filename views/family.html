@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}{{familyMember.first_name}}{% endblock %}
+{% block head %} {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/family.css" />
+{% endblock %}
+{% block content %}
+    <div id="info_box">
+        <div id="side_bar">
+            <div id="videos_link">
+                <a href="/family/videos/display?name={{ familyMember.normalized_name }}">
+                    <img class="option_image" src="/static/images/Videos.png"/></a>
+            </div>
+            <div id="photos_link">
+                <a href="/family/pictures/display?name={{ familyMember.normalized_name }}">
+                    <img class="option_image" src="/static/images/Photos.png"/></a>
+            </div>
+            <div id="transcripts_link">
+                <a href="/family/transcripts?name={{ familyMember.normalized_name }}">
+                    <img class="option_image" src="/static/images/Transcripts.png"/></a>
+            </div>
+        </div>
+        <img id="name_image" src="/static/images/{{familyMember.name_image_string}}"/>
+        <a id="profile_picture" href="">
+        <img class="profile_picture" src="/static/images/{{familyMember.profile_picture}}" alt="{{familyMember.first_name}}"/>
+        </a>
+        <div id="information">
+            <p>Age: {{ familyMember.getAgeInYears() }}</p>
+            <p>Height : {{ familyMember.height }}</p>
+            {% if familyMember.weight is not none %}
+                <p>Weight : {{ familyMember.weight }}</p>
+            {% endif %}
+            <p>GPA: {{ familyMember.GPA }} </p>
+            <p>High School: <a class="black_text" href="{{ familyMember.high_school_link }}">{{ familyMember.high_school }}</a></p>
+            <p>Email : {{ familyMember.email }}</p>
+            
+        </div>
+    </div>
+    <audio id="music" controls="controls" preload="auto">
+        <source src="/static/images/PeopleAreStrange.wav" type="audio/wave"/>
+        Your browser does not support
+    </audio>
+    <!--
+    <audio id="button_sound" controls="controls" preload="auto">
+        <source src="/static/images/button.wav" type="audio/wave"/>
+        Your browser does not support
+    </audio>
+    -->
+    {% if familyMember.twitter_username is not none %}
+        <div id="tweet_box">
+          <p id="tweet_title"> <a href="http://twitter.com/{{ familyMember.twitter_username }}">
+          <span class="tweet_blue">@{{ familyMember.twitter_username }}</span></a></p>
+        </div>
+    {% endif %}
+    <div class="space_holder"></div>
+{% endblock %}
+{% block footer %} {{ super() }}
+    <script src="/static/javascripts/tweets.js"></script>
+    <script>
+        getTweets("{{ familyMember.twitter_username }}",5)
+    </script>
+    <script>
+        musicPlaying= false;
+        music= document.getElementById('music')
+        //buttonSound= document.getElementById('button_sound')
+        var profile_picture= $('#profile_picture')
+        profile_picture.attr("href","javascript:playMusic()")
+        function playMusic() {
+            if (musicPlaying) {
+                music.pause()
+                musicPlaying=false
+            } else {
+                music.play()
+                musicPlaying= true;
+            }
+        }
+        images= $('.option_image')
+        num_images= images.length
+        /* Button Sound is annoying
+        for (var i=0; i < num_images; i++) {
+            image= images[i]
+            image.onmouseover= function() {
+                buttonSound.play()
+            }
+        }
+        */
+    </script>
+{% endblock %}
