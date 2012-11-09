@@ -1,0 +1,25 @@
+#front_page_image {
+    display:inline;
+    float:left;
+    margin-right:10px;
+}
+
+#about_kyle {
+    margin-left:5px;
+    margin-top:10px;
+    padding-top:10px;
+}
+
+.section_heading {
+    font-size:1.8em;
+    font-weight:bold;
+    text-decoration: underline;
+}
+
+.emphasize {
+    font-size:1.4em;
+}
+
+html {
+    font-family: 'Gudea', sans-serif;
+}

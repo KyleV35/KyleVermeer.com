@@ -1,3 +1,19 @@
+body {  
+    background: #000000; /* Old browsers */
+    background: -moz-linear-gradient(top, #fc9964 0%, #f17432 13%, #ea5507 47%, #0f050b 89%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fc9964), color-stop(13%,#f17432), color-stop(47%,#ea5507), color-stop(89%,#0f050b)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #fc9964 0%,#f17432 13%,#ea5507 47%,#0f050b 89%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #fc9964 0%,#f17432 13%,#ea5507 47%,#0f050b 89%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #fc9964 0%,#f17432 13%,#ea5507 47%,#0f050b 89%); /* IE10+ */
+    background: linear-gradient(to bottom, #fc9964 0%,#f17432 13%,#ea5507 47%,#0f050b 89%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fc9964', endColorstr='#0f050b',GradientType=0 ); /* IE6-9 */
+    -webkit-background-size: contain; /* Safari and Chrome */
+    -moz-background-size: contain; /* Firefox */
+    -ms-background-size: contain; /* Internet Explorer */
+    -o-background-size: contain; /* Opera */
+    background-size: contain; /* CSS3 */
+}
+
 #title {
 }
 

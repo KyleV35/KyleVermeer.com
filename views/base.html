@@ -4,37 +4,21 @@
     {% block head %}
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="/static/stylesheets/base.css" />
+    <link href='http://fonts.googleapis.com/css?family=Orienta' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css'>
     {% endblock %}
 </head>
 <body>
+    <!-- NavBar -->
     <div id="nav_bar_container">
-        <div id="nav_bar">
-            <div id="nav_bar_title_container">
-            <div id="nav_bar_title">
-                Vermeer Family Website
-            </div>
-            </div>
-            <div id="nav_bar_list_container">
-            <ul id="nav_bar_list">
-                <li>
-                    <div class="nav_bar_list_item">
-                        <a href="/">Home</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="nav_bar_list_item">
-                        <a href="/family">Family</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="nav_bar_list_item">
-                        <a href="/games">Games</a>
-                    </div>
-                </li>
-            </ul>
-            </div>
-        </div>
+    <ul>
+            <li><a class="nav_bar_link" href="/">Home</a></li>
+            <li><a class="nav_bar_link" href="/">About Kyle</a></li>
+            <li><a class="nav_bar_link" href="/">Examples</a></li>
+            <li><a class="nav_bar_link" href="https://www.facebook.com/kylevermeer">Facebook</a></li>
+            <li><a class="nav_bar_link" href="https://twitter.com/KyleV35">Twitter</a></li>
     </div>
+    <!-- /NavBar -->
     <div id="content_container">
     {% block content %}{% endblock %}
     </div>
