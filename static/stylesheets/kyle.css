@@ -38,3 +38,7 @@ html {
 .instruction_list {
     margin-left:2em;
 }
+
+#games_canvas {
+    background-color: #FFFFFF;
+}

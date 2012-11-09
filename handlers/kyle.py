@@ -18,3 +18,14 @@ class KyleExamplesHandler(BaseHandler):
     def get(self):
         template= jinja_environment.get_template('kyle_examples.html')
         self.response.out.write(template.render({}))
+        
+class ContactPageHandler(BaseHandler):
+    def get(self):
+        template= jinja_environment.get_template('contact.html')
+        self.response.out.write(template.render({}))
+        
+class GamesPageHandler(BaseHandler):
+    def get(self):
+        template= jinja_environment.get_template('games.html')
+        self.response.out.write(template.render({}))
+        

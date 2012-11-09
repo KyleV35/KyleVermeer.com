@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Games!{% endblock %}
+{% block head %} {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/kyle.css" />
+    <script src="/static/javascripts/brick_breaker.js"></script>
+{% endblock %}
+{% block content %}
+    <p class="center_text emphasize">Cool Games</p>
+    <canvas id="games_canvas" width="440" height="200">
+    </canvas>
+    <script>
+        create_game("games_canvas");
+        
+        
+    </script>
+{% endblock %}

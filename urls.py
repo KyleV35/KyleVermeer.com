@@ -6,6 +6,8 @@ routes= [
     #For now
     webapp2.Route(r'/',handler='handlers.kyle.FrontPageHandler'),
     webapp2.Route(r'/examples',handler='handlers.kyle.KyleExamplesHandler'),
+    webapp2.Route(r'/contact',handler='handlers.kyle.ContactPageHandler'),
+    webapp2.Route(r'/games',handler='handlers.kyle.GamesPageHandler'),
     webapp2.Route(r'/family',handler='handlers.family.FamilyMainPageHandler'),
     webapp2.Route(r'/family/member/<familyMemberName>', handler='handlers.family.FamilyHandler'),
     routes.PathPrefixRoute(r'/family/videos', [

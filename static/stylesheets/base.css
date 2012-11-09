@@ -32,6 +32,19 @@ time, mark, audio, video {
     border-radius: 15px;
 }
 
+#footer {
+    width: 50em;
+    margin: auto;
+    text-align:right;
+    border-top:1px solid #000000;
+}
+
+.footer_link, .footer_link:visited {
+    color:#000000;
+    text-decoration: none;
+    font-size: .7em;
+}
+
 html {
     background: #474C52;
 }
@@ -100,4 +113,8 @@ a, a:visited {
 
 .justify_text {
     text-align:justify;
+}
+
+.indent {
+    margin-left:2em;
 }
