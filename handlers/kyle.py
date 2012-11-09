@@ -13,3 +13,8 @@ class FrontPageHandler(BaseHandler):
     def get(self):
         template= jinja_environment.get_template('front_page.html')
         self.response.out.write(template.render({}))
+        
+class KyleExamplesHandler(BaseHandler):
+    def get(self):
+        template= jinja_environment.get_template('kyle_examples.html')
+        self.response.out.write(template.render({}))

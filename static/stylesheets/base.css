@@ -28,6 +28,8 @@ time, mark, audio, video {
     width: 50em;
     margin-bottom: 20px;
     min-height: 400px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
 }
 
 html {
@@ -47,6 +49,7 @@ body {
 #nav_bar_container {
     width:50em;
     margin:auto;
+    margin-top:5px;
     text-align:center;
     /* Box shadow */
     -moz-box-shadow: 5px 5px 2px 2px #222;

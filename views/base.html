@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/static/stylesheets/base.css" />
     <link href='http://fonts.googleapis.com/css?family=Orienta' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css'>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     {% endblock %}
 </head>
 <body>
@@ -13,8 +14,7 @@
     <div id="nav_bar_container">
     <ul>
             <li><a class="nav_bar_link" href="/">Home</a></li>
-            <li><a class="nav_bar_link" href="/">About Kyle</a></li>
-            <li><a class="nav_bar_link" href="/">Examples</a></li>
+            <li><a class="nav_bar_link" href="/examples">Examples</a></li>
             <li><a class="nav_bar_link" href="https://www.facebook.com/kylevermeer">Facebook</a></li>
             <li><a class="nav_bar_link" href="https://twitter.com/KyleV35">Twitter</a></li>
     </div>
@@ -24,7 +24,6 @@
     </div>
     <div id="footer">
     {% block footer %}
-    <script src="/static/javascripts/jQuery.js"></script>
     {%endblock%}
     </div>
 </body>
