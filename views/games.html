@@ -1,16 +1,21 @@
 {% extends "base.html" %}
 {% block title %}Games!{% endblock %}
 {% block head %} {{ super() }}
-    <link rel="stylesheet" type="text/css" href="/static/stylesheets/kyle.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/kyle.css?version=1" />
     <script src="/static/javascripts/brick_breaker.js"></script>
 {% endblock %}
 {% block content %}
     <p class="center_text emphasize">Cool Games</p>
-    <canvas id="games_canvas" width="440" height="200">
-    </canvas>
+    
+    <!-- Canvas -->
+    <div id="games_canvas_div">
+        <canvas id="games_canvas" width="500" height="400">
+        </canvas>
+    </div>
+    <!-- /Canvas -->
+    
+    <!-- Create Game Script -->
     <script>
-        create_game("games_canvas");
-        
-        
+        create_game("games_canvas","games_canvas_div");
     </script>
 {% endblock %}
