@@ -13,9 +13,9 @@ var BRICK_HEIGHT = 10.0;
 var NUM_ROWS = 10.0;
 var NUM_BRICKS_PER_ROW=20.0;
 var BALL_RADIUS= 10.0;
-var INITIAL_VX = 2.5;
-var INITIAL_VY = 2.5;
-var ONE_FRAME_TIME = 1000/60;
+var INITIAL_VX = 5.0;
+var INITIAL_VY = 5.0;
+var ONE_FRAME_TIME = 1000/30;
 var PADDLE_OFFSET_FROM_BOTTOM = 50;
 var PADDLE_WIDTH = 50;
 var PADDLE_HEIGHT = 15;
@@ -28,17 +28,21 @@ var ball = null;
 var paddle= null;
 var paused = true;
 var mainloop = null;
+var game_over = false;
 
 function create_game(canvasID,canvas_div) {
     canvas_element= document.getElementById(canvasID);
     var canvas_div = document.getElementById(canvas_div);
     canvas= canvas_element.getContext("2d");
-    set_up_game(canvas_div);
+    adjust_canvas_width_to_game_size(canvas_div);
+    set_up_game();
     create_key_bindings();
 }
 
-function set_up_game(canvas_div) {
-    adjust_canvas_width_to_game_size(canvas_div);
+function set_up_game() {
+    clear_canvas();
+    draw_opening_text();
+    paused=true;
     var width= canvas_element.width;
     var height= canvas_element.height;
     ball = new Ball(width/2.0,height/2.0,BALL_RADIUS,INITIAL_VX,INITIAL_VY);
@@ -59,11 +63,30 @@ function draw_bricks() {
 }
 
 function play_game() {
-    clear_canvas();
-    draw_bricks();
-    paddle.draw();
-    ball.move();
-    ball.draw();
+    if (!game_over) {
+        clear_canvas();
+        draw_bricks();
+        paddle.draw();
+        ball.move();
+        ball.draw();
+    } else {
+        clearInterval(mainloop);
+        display_game_over();
+    }
+}
+
+function display_game_over() {
+    var width= canvas_element.width;
+    var height= canvas_element.height;
+    canvas.font = "bold 12px serif";
+    canvas.fillText("Game Over! Press Space to Play Again!",height/2, width/2);
+}
+
+function draw_opening_text() {
+    var width= canvas_element.width;
+    var height= canvas_element.height;
+    canvas.font = "bold 14px serif";
+    canvas.fillText("Welcome to Brick Breaker!  Press Space to Start!",width/4, height/2);
 }
 
 function adjust_canvas_width_to_game_size(canvas_div) {
@@ -77,12 +100,17 @@ function create_key_bindings() {
     $(document).keypress(function(event) {
         //console.log(event.which);
         if (event.which == 32) {
-            if (paused) {
-                mainloop= setInterval(play_game,ONE_FRAME_TIME);
-                paused= false;
+            if (!game_over) {
+                if (paused) {
+                    mainloop= setInterval(play_game,ONE_FRAME_TIME);
+                    paused= false;
+                } else {
+                    clearInterval(mainloop);
+                    paused=true;
+                }
             } else {
-                clearInterval(mainloop);
-                paused=true;
+                game_over = false;
+                set_up_game();
             }
         }
         else if (event.which == 97 || event.which == 37) {
@@ -176,6 +204,7 @@ function Ball(center_x,center_y,radius, velocity_x, velocity_y,color) {
         
         this.check_wall_collision(new_x,new_y);
         this.check_brick_collision(new_x,new_y);
+        this.check_paddle_collision(new_x,new_y);
         
     }
     
@@ -183,7 +212,10 @@ function Ball(center_x,center_y,radius, velocity_x, velocity_y,color) {
         if ((new_x + this.radius) >= canvas_element.width || (new_x-this.radius) <= 0.0) {
             this.vx = -this.vx;
         }
-        if ((new_y + this.radius) >= canvas_element.height || (new_y-this.radius) <=0.0) {
+        if ((new_y + this.radius) >= canvas_element.height) {
+            game_over = true;
+        }
+        if ((new_y-this.radius) <=0.0) {
             this.vy = -this.vy;
         }
     }
@@ -213,6 +245,8 @@ function Ball(center_x,center_y,radius, velocity_x, velocity_y,color) {
                         } else {
                             this.vx = -this.vx;
                         }
+                        //this.y = this.y + this.vy;
+                        //this.x = this.x +this.vx;
                         break;
                     }
                 }
@@ -226,9 +260,39 @@ function Ball(center_x,center_y,radius, velocity_x, velocity_y,color) {
                         } else {
                             this.vx = -this.vx;
                         }
+                        //this.y = this.y + this.vy;
+                        //this.x = this.x +this.vx;
                         break;
                     }
                 }
+            }
+        }
+    }
+    
+    this.check_paddle_collision = function(x,y) {
+        var radius = this.radius;
+        var right_x_ball = x + radius;
+        var left_x_ball = x - radius;
+        var top_y_ball = y - radius;
+        var bottom_y_ball = y + radius;
+        var right_x_paddle = paddle.x+ paddle.width;
+        var left_x_paddle = paddle.x;
+        var top_y_paddle = paddle.y;
+        var bottom_y_paddle = paddle.y+paddle.height;
+        if (right_x_ball < right_x_paddle && right_x_ball > left_x_paddle) {
+            if ((top_y_ball > top_y_paddle && top_y_ball < bottom_y_paddle) ||
+            (bottom_y_ball > top_y_paddle && bottom_y_ball < bottom_y_paddle)) {
+                this.vy= -this.vy;
+                this.y = this.y + this.vy;
+                this.x = this.x +this.vx;
+            }
+        }
+        else if (left_x_ball > left_x_paddle && left_x_ball < right_x_paddle) {
+            if ((top_y_ball > top_y_paddle && top_y_ball < bottom_y_paddle) ||
+            (bottom_y_ball > top_y_paddle && bottom_y_ball < bottom_y_paddle)) {
+                this.vy= -this.vy;
+                this.y = this.y + this.vy;
+                this.x = this.x +this.vx;
             }
         }
     }
