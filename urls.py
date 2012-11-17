@@ -7,6 +7,10 @@ routes= [
     webapp2.Route(r'/',handler='handlers.kyle.FrontPageHandler'),
     webapp2.Route(r'/examples',handler='handlers.kyle.KyleExamplesHandler'),
     webapp2.Route(r'/contact',handler='handlers.kyle.ContactPageHandler'),
+    routes.PathPrefixRoute(r'/games', [
+        webapp2.Route(r'/',handler='handlers.kyle.GamesPageHandler'),
+        webapp2.Route(r'/init',handler='handlers.kyle.GamesDatabaseHandler'),
+    ]),
     webapp2.Route(r'/games',handler='handlers.kyle.GamesPageHandler'),
     webapp2.Route(r'/family',handler='handlers.family.FamilyMainPageHandler'),
     webapp2.Route(r'/family/member/<familyMemberName>', handler='handlers.family.FamilyHandler'),

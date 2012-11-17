@@ -8,6 +8,7 @@ from google.appengine.ext import db
 from google.appengine.api import memcache
 from util.memcacheHelper import safeMemcacheSet
 from util.template import jinja_environment
+from models.games import BrickBreaker
 
 class FrontPageHandler(BaseHandler):
     def get(self):
@@ -26,6 +27,21 @@ class ContactPageHandler(BaseHandler):
         
 class GamesPageHandler(BaseHandler):
     def get(self):
+        BBDB = BrickBreaker.get_by_key_name("High_Score_DB")
+        template_values = {
+            "top_score": BBDB.top_score
+        }
         template= jinja_environment.get_template('games.html')
-        self.response.out.write(template.render({}))
+        self.response.out.write(template.render(template_values))
         
+class GamesDatabaseHandler(BaseHandler):
+    def get(self):
+        create_brick_breaker_DB()
+        self.response.out.write("Complete!")
+    def post(self):
+        self.request.get("score");
+        
+        
+def create_brick_breaker_DB():
+    BBDB = BrickBreaker(key_name="High_Score_DB", top_score=0)
+    BBDB.put()
