@@ -1,0 +1,50 @@
+HTML (Hyper-Text Markup Language)
+
+<p> </p> p -> paragraph
+<h1> </h1> -> Header - Level 1
+<h3> </h3> -> Header - Level 3
+Headers go level 1 through level 6.
+
+<a href="http://www.google.com"> Link Text </a> -> Anchor (aka a link)
+
+In the <head> tag, you can put information about the page
+
+e.i.
+
+<head>
+<title>Sara's Website!</title>
+</head>
+
+CSS (Cascading Style Sheets)
+
+Classes are ways of grouping objects, to give them similar appearances
+
+In HTML File:
+<p class="green">Green Text</p>
+
+In the CSS File:
+
+.green {
+    color: green;
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+Some example rules:
+
+color: orange;
+font-size: 14px;
+text-decoration: underline;
+text-align: center;
+
+In CSS, you can also not use classes.  Instead, you can use the name of the tag.
+
+For Example:
+
+IF you have a <h1></h1> element on your page, you can give it a CSS rule like so:
+
+h1 {
+    
+}
+
+

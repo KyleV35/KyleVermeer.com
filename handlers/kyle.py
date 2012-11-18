@@ -41,6 +41,11 @@ class GamesDatabaseHandler(BaseHandler):
     def post(self):
         self.request.get("score");
         
+class SaraPageHandler(BaseHandler):
+    def get(self):
+        template= jinja_environment.get_template('sara.html')
+        self.response.out.write(template.render({}))
+        
         
 def create_brick_breaker_DB():
     BBDB = BrickBreaker(key_name="High_Score_DB", top_score=0)
