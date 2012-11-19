@@ -19,7 +19,8 @@ class BrickBreakerPageHandler(BaseHandler):
     def get(self):
         BBDB = BrickBreaker.get_by_key_name("High_Score_DB")
         template_values = {
-            "top_score": BBDB.top_score
+            "top_score": BBDB.top_score,
+            "top_score_name":BBDB.name
         }
         template= jinja_environment.get_template('brick_breaker.html')
         self.response.out.write(template.render(template_values))

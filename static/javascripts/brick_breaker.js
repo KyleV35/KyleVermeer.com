@@ -39,9 +39,11 @@ var score = 0;
 var bricks_left = 0;
 
 var input_form = null;
+var high_score_name_input = null;
 
-function create_game(canvasID,canvas_div, submit_button_selector, input_form_selector) {
+function create_game(canvasID,canvas_div, submit_button_selector,high_score_name_selector,input_form_selector) {
     submit_button = $(submit_button_selector);
+    high_score_name_input = $(high_score_name_selector);
     console.log(submit_button);
     submit_button.click(function() {
         game_over_function();
@@ -129,7 +131,9 @@ function play_game() {
 }
 
 function game_over_function() {
+    var name = high_score_name_input.val();
     $.post("brickbreaker/highScore", {
+        name: name,
         score: score
         }, function(data) {
         alert(data);
@@ -184,8 +188,7 @@ function create_key_bindings() {
                     pause();
                 }
             } else {
-                game_over = false;
-                set_up_game();
+                //Game is over
             }
         }
         else if (event.which == 97 || event.which == 37) {
