@@ -5,3 +5,4 @@ import logging
 
 class BrickBreaker(db.Model):
     top_score = db.IntegerProperty();
+    name = db.StringProperty();

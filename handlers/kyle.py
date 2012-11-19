@@ -25,22 +25,6 @@ class ContactPageHandler(BaseHandler):
         template= jinja_environment.get_template('contact.html')
         self.response.out.write(template.render({}))
         
-class GamesPageHandler(BaseHandler):
-    def get(self):
-        BBDB = BrickBreaker.get_by_key_name("High_Score_DB")
-        template_values = {
-            "top_score": BBDB.top_score
-        }
-        template= jinja_environment.get_template('games.html')
-        self.response.out.write(template.render(template_values))
-        
-class GamesDatabaseHandler(BaseHandler):
-    def get(self):
-        create_brick_breaker_DB()
-        self.response.out.write("Complete!")
-    def post(self):
-        self.request.get("score");
-        
 class SaraPageHandler(BaseHandler):
     def get(self):
         template= jinja_environment.get_template('sara.html')

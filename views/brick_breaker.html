@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Games!{% endblock %}
+{% block head %} {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/kyle.css?version=2" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/games.css" />
+    <script src="/static/javascripts/brick_breaker.js"></script>
+{% endblock %}
+{% block content %}
+    <p class="center_text emphasize">Brick Breaker</p>
+    <p class="center_text">Score: <span id="score_span"></span> Highest Score: {{top_score}}</p>
+    
+    <!-- Canvas -->
+    <div id="games_canvas_div">
+        <canvas id="games_canvas" width="500" height="400">
+        </canvas>
+        <form id="input_form" action="brickerbreaker/highScore" method="post">
+            <div class="form_div">
+                <p>Would you like to submit your score for a chance at being on the high score table?</p>
+                <div class="name_input_div">
+                    <label>Name: </label><input class="high_score_input" type="text" value="20"/>
+                </div>
+                <div id="submit_button"></div>
+            </div>
+        </form>
+    </div>
+    <!-- /Canvas -->
+    
+    
+    <!-- Create Game Script -->
+    <script>
+        
+        var game_over = function(score) {
+            $(".high_score_input").show();
+            $.post("brickbreaker/highScore", {
+                score: score
+            }, function(data) {
+                alert(data);
+            });
+        }
+        create_game("games_canvas","games_canvas_div","#submit_button","#input_form");
+    </script>
+{% endblock %}

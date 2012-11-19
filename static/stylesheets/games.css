@@ -1,0 +1,50 @@
+#games_canvas {
+    background-color: #FFFFFF;
+    display: inline;
+}
+
+#games_canvas_div {
+    margin-left: auto;
+    margin-right:auto;
+    width: 500px;
+    min-height:400px;
+}
+
+.game_stub_image {
+    float: left;
+    margin-right: 10px;
+}
+
+.game_stub {
+    margin: 10px;
+}
+
+.game_link, .game_link:visited {
+    color: #000000;
+}
+
+#input_form {
+    float: left;
+    position: relative;
+    top: -400px;
+}
+
+#submit_button {
+    background-image: url('/static/images/submit_score_button.png');
+    width: 140px;
+    height: 75px;
+    margin:auto;
+}
+
+#submit_button:hover {
+    cursor: pointer;
+}
+
+.form_div {
+    padding: 10px;
+}
+
+.name_input_div {
+    margin: auto;
+    width: 250px;
+}

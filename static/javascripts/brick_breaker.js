@@ -26,6 +26,7 @@ var BRICK_COLORS = ["#000000","#DD0000","#DDDD00","#00DD00","#0000DD"];
 var ROWS_PER_COLOR = 2;
 
 var canvas_element= null;
+var submit_button = null
 var canvas = null;
 var bricks = [];
 var ball = null;
@@ -37,9 +38,17 @@ var speed = 0;
 var score = 0;
 var bricks_left = 0;
 
-function create_game(canvasID,canvas_div) {
+var input_form = null;
+
+function create_game(canvasID,canvas_div, submit_button_selector, input_form_selector) {
+    submit_button = $(submit_button_selector);
+    console.log(submit_button);
+    submit_button.click(function() {
+        game_over_function();
+    });
     canvas_element= document.getElementById(canvasID);
     var canvas_div = $("#"+canvas_div);
+    input_form = $(input_form_selector);
     canvas= canvas_element.getContext("2d");
     adjust_canvas_width_to_game_size(canvas_div);
     set_up_game();
@@ -50,15 +59,23 @@ function create_game(canvasID,canvas_div) {
 function set_up_game() {
     clear_canvas();
     draw_opening_text();
+    game_over = false;
     paused=true;
     var width= canvas_element.width;
     var height= canvas_element.height;
     speed = START_SPEED;
     score = 0;
+    hide_input();
     update_scoreboard();
     create_ball(width,height);
     create_paddle(width,height);
     create_bricks();
+}
+
+function hide_input() {
+    if (input_form) {
+        input_form.hide();
+    }
 }
 
 function create_ball(canvas_width, canvas_height) {
@@ -107,7 +124,18 @@ function play_game() {
     } else {
         clearInterval(mainloop);
         display_game_over();
+        $(".high_score_input").show();
     }
+}
+
+function game_over_function() {
+    $.post("brickbreaker/highScore", {
+        score: score
+        }, function(data) {
+        alert(data);
+    });
+    set_up_game();
+            
 }
 
 function level_complete() {
@@ -121,6 +149,10 @@ function level_complete() {
 function display_game_over() {
     var width= canvas_element.width;
     var height= canvas_element.height;
+    if (input_form) {
+        input_form.show();
+    }
+    clear_canvas();
     canvas.textAlign ="center";
     canvas.font = "bold 14px serif";
     canvas.fillText("Game Over! Press Space to Play Again!",width/2, height/2 - TEXT_VERTICAL_SHIFT);
@@ -129,6 +161,7 @@ function display_game_over() {
 function draw_opening_text() {
     var width= canvas_element.width;
     var height= canvas_element.height;
+    canvas.fillStyle= "#000000";
     canvas.textAlign = "center";
     canvas.font = "bold 14px serif";
     canvas.fillText("Welcome to Brick Breaker!  Press Space to Start!",width/2, height/2 - TEXT_VERTICAL_SHIFT);

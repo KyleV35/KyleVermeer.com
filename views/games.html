@@ -1,22 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Games!{% endblock %}
+{% block title %}Examples{% endblock %}
 {% block head %} {{ super() }}
-    <link rel="stylesheet" type="text/css" href="/static/stylesheets/kyle.css?version=1" />
-    <script src="/static/javascripts/brick_breaker.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/kyle.css" />
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/games.css" />
 {% endblock %}
 {% block content %}
-    <p class="center_text emphasize">Brick Breaker</p>
-    <p class="center_text">Score: <span id="score_span"></span> Highest Score: {{top_score}}</p>
-    
-    <!-- Canvas -->
-    <div id="games_canvas_div">
-        <canvas id="games_canvas" width="500" height="400">
-        </canvas>
+    <p class="center_text emphasize">Games</p>
+    <div class="game_stub">
+        <a class="game_link" href="games/brickbreaker">
+            <img class="game_stub_image" src="/static/images/BrickBreaker.png" alt="Brick Breaker"/>
+            <p> Play a classic game of brick breaker! </p>
+            <p> This games is written entirely in Javascript using the HTML5 canvas technology. </p>
+            <p> Created: November 18, 2012 </p>
+            <p> By: Kyle Vermeer </p>
+        </a>
     </div>
-    <!-- /Canvas -->
-    
-    <!-- Create Game Script -->
-    <script>
-        create_game("games_canvas","games_canvas_div");
-    </script>
 {% endblock %}
