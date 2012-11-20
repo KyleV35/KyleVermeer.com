@@ -42,3 +42,16 @@ class BrickBreakerHighScoresHandler(BaseHandler):
             self.response.out.write("You have set a new high score!")
         else:
             self.response.out.write("No new high score!")
+            
+class BrickBreakerInitHandler(BaseHandler):
+    def get(self):
+        top_score_1 = BrickBreaker(key_name="High_Score_DB_1",score=0)
+        top_score_1.put()
+        top_score_2 = BrickBreaker(key_name="High_Score_DB_2",score=0)
+        top_score_2.put()
+        top_score_3 = BrickBreaker(key_name="High_Score_DB_3",score=0)
+        top_score_3.put()
+        top_score_4 = BrickBreaker(key_name="High_Score_DB_4",score=0)
+        top_score_4.put()
+        top_score_5 = BrickBreaker(key_name="High_Score_DB_5",score=0)
+        top_score_5.put()

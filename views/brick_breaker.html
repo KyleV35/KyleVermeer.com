@@ -7,7 +7,7 @@
 {% endblock %}
 {% block content %}
     <p class="center_text emphasize">Brick Breaker</p>
-    <p class="center_text">Score: <span id="score_span"></span> Highest Score: {{top_score_name}}: {{top_score}}</p>
+    <p class="center_text">Score: <span id="score_span"></span></p>
     
     <!-- Canvas -->
     <div id="games_canvas_div">
@@ -24,6 +24,10 @@
         </form>
     </div>
     <!-- /Canvas -->
+    
+    <div id="high_score_div">
+        <p>High Scores: {{top_score_name}}: {{top_score}}</p>
+    </div>
     
     
     <!-- Create Game Script -->
