@@ -25,19 +25,32 @@
 
 #input_form {
     float: left;
-    position: relative;
-    top: -400px;
+    position: absolute;
+    width:540px;
+}
+
+#buttons_div {
+    margin:auto;
+    width:300px;
+    height:75px;
 }
 
 #submit_button {
     background-image: url('/static/images/submit_score_button.png');
     width: 140px;
     height: 75px;
-    margin:auto;
+    display: inline-block;
 }
 
-#submit_button:hover {
+#submit_button:hover, #no_submit_button:hover {
     cursor: pointer;
+}
+
+#no_submit_button {
+    background-image: url('/static/images/no_submit_score_button.png');
+    width: 140px;
+    height: 75px;
+    display:inline-block;
 }
 
 .form_div {
@@ -47,4 +60,17 @@
 .name_input_div {
     margin: auto;
     width: 250px;
+}
+
+#high_score_div {
+    text-align:center;
+    width:400px;
+    margin:auto;
+    margin-top: 15px;
+}
+
+.high_score_title {
+    font-weight: bold;
+    font-size: 20px;
+    padding-bottom: 5px;
 }

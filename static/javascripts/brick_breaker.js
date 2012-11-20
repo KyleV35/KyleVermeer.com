@@ -10,8 +10,8 @@ var BRICK_WIDTH = 25;
 var BRICK_SPACING_X = 3;
 var BRICK_SPACING_Y = 2;
 var BRICK_HEIGHT = 15;
-var NUM_ROWS = 10;
-var NUM_BRICKS_PER_ROW=20;
+var NUM_ROWS = 1;
+var NUM_BRICKS_PER_ROW=1;
 var BALL_RADIUS= 10;
 var INITIAL_VX = 1;
 var INITIAL_VY = 1;
@@ -22,11 +22,11 @@ var PADDLE_HEIGHT = 15;
 var PADDLE_MOVE_AMOUNT = 5;
 var TEXT_VERTICAL_SHIFT= -50;
 var START_SPEED = 75;
-var BRICK_COLORS = ["#000000","#DD0000","#DDDD00","#00DD00","#0000DD"];
 var ROWS_PER_COLOR = 2;
 
 var canvas_element= null;
-var submit_button = null
+var submit_button = null;
+var start_new_game_button = null;
 var canvas = null;
 var bricks = [];
 var ball = null;
@@ -34,44 +34,69 @@ var paddle= null;
 var paused = true;
 var mainloop = null;
 var game_over = false;
+var is_level_complete = false;
 var speed = 0;
 var score = 0;
 var bricks_left = 0;
+var score_multiplier = 0;
 
 var input_form = null;
 var high_score_name_input = null;
 
-function create_game(canvasID,canvas_div, submit_button_selector,high_score_name_selector,input_form_selector) {
+function create_game(canvasID,canvas_div_selector, submit_button_selector,start_new_game_button_selector, 
+                    high_score_name_selector,input_form_selector) {
     submit_button = $(submit_button_selector);
+    start_new_game_button = $(start_new_game_button_selector);
     high_score_name_input = $(high_score_name_selector);
-    console.log(submit_button);
-    submit_button.click(function() {
-        game_over_function();
-    });
     canvas_element= document.getElementById(canvasID);
-    var canvas_div = $("#"+canvas_div);
+    var canvas_div = $(canvas_div_selector);
     input_form = $(input_form_selector);
     canvas= canvas_element.getContext("2d");
     adjust_canvas_width_to_game_size(canvas_div);
     set_up_game();
+    set_up_submit_buttons();
     create_key_bindings();
     create_mouse_bindings(canvas_div);
 }
 
 function set_up_game() {
-    clear_canvas();
-    draw_opening_text();
+    reset_game();
+    draw_start_state();
+}
+
+function reset_game() {
     game_over = false;
+    is_level_complete= false;
     paused=true;
-    var width= canvas_element.width;
-    var height= canvas_element.height;
+    score_multiplier = 1;
     speed = START_SPEED;
     score = 0;
+}
+
+function set_up_next_level () {
+    draw_start_state();
+    resume();
+}
+
+function draw_start_state() {
+    clear_canvas();
+    draw_opening_text();
     hide_input();
     update_scoreboard();
+    var width= canvas_element.width;
+    var height= canvas_element.height;
     create_ball(width,height);
     create_paddle(width,height);
     create_bricks();
+}
+
+function set_up_submit_buttons() {
+    submit_button.click(function() {
+        game_over_function();
+    });
+    start_new_game_button.click(function() {
+        set_up_game();
+    });
 }
 
 function hide_input() {
@@ -100,7 +125,7 @@ function create_bricks() {
 function draw_bricks() {
     var num_bricks = bricks.length;
     for (var i=0; i < num_bricks; i++) {
-        if (bricks[i]!=null) {
+        if (bricks[i]!==null) {
             bricks[i].draw();
         }
     }
@@ -136,18 +161,36 @@ function game_over_function() {
         name: name,
         score: score
         }, function(data) {
-        alert(data);
-    });
+            var json = JSON.parse(data);
+            update_high_scores(json);
+        }
+    );
     set_up_game();
             
+}
+
+function update_high_scores(high_score_data) {
+    high_score_1 = "1. " + high_score_data.top_score_1_DB.name +": " + high_score_data.top_score_1_DB.score;
+    $("#top_score_1").text(high_score_1);
+    high_score_2 = "2. " + high_score_data.top_score_2_DB.name +": " + high_score_data.top_score_2_DB.score;
+    $("#top_score_2").text(high_score_2);
+    high_score_3 = "3. " + high_score_data.top_score_3_DB.name +": " + high_score_data.top_score_3_DB.score;
+    $("#top_score_3").text(high_score_3);
+    high_score_4 = "4. " + high_score_data.top_score_4_DB.name +": " + high_score_data.top_score_4_DB.score;
+    $("#top_score_4").text(high_score_4);
+    high_score_5 = "5. " + high_score_data.top_score_5_DB.name +": " + high_score_data.top_score_5_DB.score;
+    $("#top_score_5").text(high_score_5);
 }
 
 function level_complete() {
     var width= canvas_element.width;
     var height= canvas_element.height;
+    score_multiplier = score_multiplier +1;
+    is_level_complete= true;
+    clearInterval(mainloop);
     canvas.textAlign ="center";
     canvas.font = "bold 14px serif";
-    canvas.fillText("Level Complete!",width/2, height/2 - TEXT_VERTICAL_SHIFT);
+    canvas.fillText("Level Complete! Press 'n' to go to the next level!ke",width/2, height/2 - TEXT_VERTICAL_SHIFT);
 }
 
 function display_game_over() {
@@ -157,9 +200,6 @@ function display_game_over() {
         input_form.show();
     }
     clear_canvas();
-    canvas.textAlign ="center";
-    canvas.font = "bold 14px serif";
-    canvas.fillText("Game Over! Press Space to Play Again!",width/2, height/2 - TEXT_VERTICAL_SHIFT);
 }
 
 function draw_opening_text() {
@@ -179,7 +219,7 @@ function adjust_canvas_width_to_game_size(canvas_div) {
 
 function create_key_bindings() {
     $(document).keypress(function(event) {
-        //console.log(event.which);
+        console.log(event.which);
         if (event.which == 32) {
             if (!game_over) {
                 if (paused) {
@@ -187,8 +227,6 @@ function create_key_bindings() {
                 } else {
                     pause();
                 }
-            } else {
-                //Game is over
             }
         }
         else if (event.which == 97 || event.which == 37) {
@@ -196,6 +234,10 @@ function create_key_bindings() {
         }
         else if (event.which == 100 || event.which == 39) {
             paddle.move(PADDLE_MOVE_AMOUNT);
+        } 
+        else if (event.which == 78 && is_level_complete) {
+            level_complete = false
+            draw_start_state();
         }
     });
 }
@@ -240,15 +282,15 @@ function make_n_rows(num_rows, start_x, start_y, brick_width, x_spacing, y_spaci
     for (var i=0; i < num_rows; i++) {
         var color = "#000000";
         var row_group = Math.floor(i/ROWS_PER_COLOR);
-        if (row_group == 0) {
+        if (row_group === 0) {
             color = "#DDDD00";
-        } else if (row_group == 1) {
+        } else if (row_group === 1) {
             color = "#00DDAA";
-        } else if (row_group == 2) {
+        } else if (row_group === 2) {
             color = "#00DDDD";
-        } else if (row_group == 3) {
+        } else if (row_group === 3) {
             color ="#0000DD";
-        } else if (row_group == 4) {
+        } else if (row_group === 4) {
             color ="#DD00DD";
         }
         //var color = BRICK_COLORS[row_group];
@@ -262,7 +304,7 @@ function Brick(left_x,top_y,width,height, score, color) {
     this.y= top_y;
     this.width= width;
     this.height= height;
-    this.color= color
+    this.color= color;
     this.score= score;
     
     this.draw = function() {
@@ -278,7 +320,7 @@ function Paddle(left_x,top_y,width,height,color) {
     this.height= height;
     this.momentum = 0;
     
-    if (color == null) {
+    if (!color) {
         this.color= "#000000";
     } else {
         this.color= color;
@@ -305,7 +347,7 @@ function Ball(center_x,center_y,radius, velocity_x, velocity_y,color) {
     this.radius = radius;
     this.vx= velocity_x;
     this.vy= velocity_y;
-    if (color == null) {
+    if (!color) {
         this.color= "#000000";
     } else {
         this.color= color;
@@ -356,7 +398,7 @@ function Ball(center_x,center_y,radius, velocity_x, velocity_y,color) {
         var num_bricks = bricks.length;
         for (var i=0; i < num_bricks; i++) {
             brick= bricks[i];
-            if (brick!=null) {
+            if (brick!==null) {
                 var radius= this.radius;
                 var right_x_ball = new_x + radius;
                 var left_x_ball = new_x - radius;
@@ -370,7 +412,7 @@ function Ball(center_x,center_y,radius, velocity_x, velocity_y,color) {
                 if (right_x_ball < right_x_brick && right_x_ball > left_x_brick) {
                     if ((top_y_ball > top_y_brick && top_y_ball < bottom_y_brick) ||
                     (bottom_y_ball > top_y_brick && bottom_y_ball < bottom_y_brick)) {
-                        score = score + bricks[i].score;
+                        score = score + bricks[i].score * score_multiplier;
                         bricks_left= bricks_left-1;
                         update_scoreboard();
                         bricks[i] = null;
@@ -444,8 +486,8 @@ function Ball(center_x,center_y,radius, velocity_x, velocity_y,color) {
                     speed = speed+paddle.momentum;
                 } else if (this.vx < 0 && paddle.momentum < 0) {
                     speed = speed-paddle.momentum;
-                } else if (paddle.momentum ==0) {
-                    
+                } else if (paddle.momentum ===0) {
+                    speed=speed;
                 } else {
                     speed = speed-paddle.momentum;
                 }
@@ -464,8 +506,8 @@ function Ball(center_x,center_y,radius, velocity_x, velocity_y,color) {
                     speed = speed+paddle.momentum;
                 } else if (this.vx < 0 && paddle.momentum < 0) {
                     speed = speed-paddle.momentum; // Momentum is negative, will increase speed
-                } else if (paddle.momentum ==0) {
-                    
+                } else if (paddle.momentum ===0) {
+                    speed=speed;
                 } else {
                     if (paddle.momentum > 0) {
                         speed = speed-paddle.momentum;

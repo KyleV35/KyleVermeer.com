@@ -11,27 +11,36 @@
     
     <!-- Canvas -->
     <div id="games_canvas_div">
-        <canvas id="games_canvas" width="500" height="400">
-        </canvas>
-        <form id="input_form" action="brickerbreaker/highScore" method="post">
+        <div style="position: relative; width: 0; height: 0">
+        <form id="input_form" action="brickerbreaker/highScore" method="post" style="display:inline;">
             <div class="form_div">
                 <p>Would you like to submit your score for a chance at being on the high score table?</p>
                 <div class="name_input_div">
                     <label>Name: </label><input id="high_score_name_input" type="text" placeholder="Your Name"/>
                 </div>
-                <div id="submit_button"></div>
+                <div id="buttons_div">
+                    <div id="no_submit_button"></div><div id="submit_button"></div>
+                </div>
             </div>
         </form>
+        </div>
+        <canvas id="games_canvas" width="500" height="400">
+        </canvas>
     </div>
     <!-- /Canvas -->
     
     <div id="high_score_div">
-        <p>High Scores: {{top_score_name}}: {{top_score}}</p>
+        <p class="high_score_title">High Scores: </p>
+        <p id="top_score_1">1. {{top_score_1_DB.name}}: {{top_score_1_DB.score}}</p>
+        <p id="top_score_2">2. {{top_score_2_DB.name}}: {{top_score_2_DB.score}}</p>
+        <p id="top_score_3">3. {{top_score_3_DB.name}}: {{top_score_3_DB.score}}</p>
+        <p id="top_score_4">4. {{top_score_4_DB.name}}: {{top_score_4_DB.score}}</p>
+        <p id="top_score_5">5. {{top_score_5_DB.name}}: {{top_score_5_DB.score}}</p>
     </div>
     
     
     <!-- Create Game Script -->
     <script>
-        create_game("games_canvas","games_canvas_div","#submit_button","#high_score_name_input","#input_form");
+        create_game("games_canvas","#games_canvas_div","#submit_button","#no_submit_button","#high_score_name_input","#input_form");
     </script>
 {% endblock %}
