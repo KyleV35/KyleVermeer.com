@@ -10,8 +10,8 @@ var BRICK_WIDTH = 25;
 var BRICK_SPACING_X = 3;
 var BRICK_SPACING_Y = 2;
 var BRICK_HEIGHT = 15;
-var NUM_ROWS = 1;
-var NUM_BRICKS_PER_ROW=1;
+var NUM_ROWS = 10;
+var NUM_BRICKS_PER_ROW=20;
 var BALL_RADIUS= 10;
 var INITIAL_VX = 1;
 var INITIAL_VY = 1;
@@ -21,8 +21,9 @@ var PADDLE_WIDTH = 50;
 var PADDLE_HEIGHT = 15;
 var PADDLE_MOVE_AMOUNT = 5;
 var TEXT_VERTICAL_SHIFT= -50;
-var START_SPEED = 75;
+var START_SPEED = 300;
 var ROWS_PER_COLOR = 2;
+var SPEED_DIVISOR = 100
 
 var canvas_element= null;
 var submit_button = null;
@@ -133,18 +134,18 @@ function draw_bricks() {
 
 function play_game() {
     if (!game_over) {
-        var cur_speed = speed/20;
+        var cur_speed = speed/SPEED_DIVISOR;
         if (cur_speed <= 0) {
-            speed= 20;
+            speed= SPEED_DIVISOR;
             cur_speed =1;
         }
         for (var i=0; i <cur_speed; i++) {
-            clear_canvas();
-            draw_bricks();
-            paddle.draw();
             ball.move();
-            ball.draw();
         }
+        clear_canvas();
+        draw_bricks();
+        paddle.draw();
+        ball.draw();
         if (bricks_left == 0) {
             level_complete();
         }
@@ -235,9 +236,10 @@ function create_key_bindings() {
         else if (event.which == 100 || event.which == 39) {
             paddle.move(PADDLE_MOVE_AMOUNT);
         } 
-        else if (event.which == 78 && is_level_complete) {
-            level_complete = false
+        else if (event.which == 110 && is_level_complete) {
+            is_level_complete = false
             draw_start_state();
+            paused = true;
         }
     });
 }
@@ -272,7 +274,7 @@ function make_row(start_x, spacing, start_y, brick_height, num_bricks, row_group
     var x=start_x;
     var total_row_groups = NUM_ROWS/ROWS_PER_COLOR;
     for (var i=0; i <num_bricks; i++) {
-        bricks.push(new Brick(x,start_y,BRICK_WIDTH,brick_height,(total_row_groups-row_group)*10,color));
+        bricks.push(new Brick(x,start_y,BRICK_WIDTH,brick_height,(total_row_groups-row_group)*10*score_multiplier,color));
         x= x+BRICK_WIDTH+spacing;
     }
 }
@@ -412,7 +414,7 @@ function Ball(center_x,center_y,radius, velocity_x, velocity_y,color) {
                 if (right_x_ball < right_x_brick && right_x_ball > left_x_brick) {
                     if ((top_y_ball > top_y_brick && top_y_ball < bottom_y_brick) ||
                     (bottom_y_ball > top_y_brick && bottom_y_ball < bottom_y_brick)) {
-                        score = score + bricks[i].score * score_multiplier;
+                        score = score + bricks[i].score;
                         bricks_left= bricks_left-1;
                         update_scoreboard();
                         bricks[i] = null;
