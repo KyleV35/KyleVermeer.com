@@ -5,7 +5,7 @@ routes= [
     #webapp2.Route(r'/', handler='main.MainHandler'),
     #For now
     webapp2.Route(r'/',handler='handlers.kyle.FrontPageHandler'),
-    webapp2.Route(r'/sara',handler='handlers.kyle.FrontPageHandler'),
+    webapp2.Route(r'/sara',handler='handlers.kyle.SaraPageHandler'),
     webapp2.Route(r'/examples',handler='handlers.kyle.KyleExamplesHandler'),
     webapp2.Route(r'/contact',handler='handlers.kyle.ContactPageHandler'),
     webapp2.Route(r'/games',handler='handlers.games.GamesPageHandler'),
