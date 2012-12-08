@@ -1,8 +1,8 @@
 $(document).ready(function(){
 })
 
-var getTweets= function(screen_name_user, num_tweets) {
-    var tweet_box= $('#tweet_box')
+function get_tweets(screen_name_user, num_tweets, tweet_box_id) {
+    var tweet_box= $("#"+tweet_box_id)
     $.ajax({
         type:'GET',
         dataType: 'jsonp',
