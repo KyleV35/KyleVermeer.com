@@ -17,29 +17,45 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	vertical-align: baseline;
+	vertical-align: top;
 	list-style:none;
 }
 
-@background-color: #FEFBF0;
+@background: #fefbf0 url('/static/images/background.png') repeat center;
 
 html {
-    background: @background-color;
+    background: @background;
 }
 
-@page-min-height: 600px;
+@page-min-height: 400px;
 
 body {  
-    background: @background-color;
+    background: @background;
+    min-height: @page-min-height;
+}
+
+#content {
     min-height: @page-min-height;
 }
 
 
 @row-width: 800px;
+@row-margin-bottom: 40px;
 
 .l-row {
-    width: @row-width;
+    width: (@row-width + 8);
     margin: auto;
+    margin-bottom: @row-margin-bottom;
+}
+
+.l-column1 {
+    display: inline-block;
+    width: (@row-width * (1/8));
+}
+
+.l-column2 {
+    display: inline-block;
+    width: (@row-width * (2/8));
 }
 
 .l-column3 {
@@ -47,9 +63,44 @@ body {
     width: (@row-width * (3/8));
 }
 
+.l-split1 {
+    display: inline-block;
+    width: (@row-width);
+}
+
+.l-split3 {
+    display: inline-block;
+    width: (@row-width * ((8/3)/8));
+}
+
 .l-spacing1 {
     margin-left: (@row-width * (1/8));
 }
+
+.l-spacing2 {
+    margin-left: (@row-width * (2/8));
+}
+
+.l-spacing3 {
+    margin-left: (@row-width * (3/8));
+}
+
+.l-spacing4 {
+    margin-left: (@row-width * (4/8));
+}
+
+.l-spacing5 {
+    margin-left: (@row-width * (5/8));
+}
+
+.l-spacing6 {
+    margin-left: (@row-width * (6/8));
+}
+
+.l-spacing7 {
+    margin-left: (@row-width * (7/8));
+}
+
 
 @content-spacing-from-nav-bar: 25px;
 
@@ -69,8 +120,11 @@ body {
     border-radius: 15px;
 }
 
+/* Footer */
+@footer-width: 800px;
+
 #footer {
-    width: 50em;
+    width: @footer-width;
     margin: auto;
     text-align:right;
     border-top:1px solid #000000;
@@ -82,6 +136,8 @@ body {
     font-size: .7em;
 }
 
+/* /Footer */
+
 /* Used for floated divs */
 .space_holder {
     clear: both;
@@ -89,7 +145,7 @@ body {
 
 /* Nav Bar */
 
-@nav-bar-background-color: #65909A;
+@nav-bar-background: #25a7df url('/static/images/navbar.png') repeat-x center;
 @nav-bar-text-color: #FFFFFF;
 @nav-bar-shadow: 0px 0px 0px 0px #222;
 @nav-bar-height: 38px;
@@ -103,7 +159,7 @@ body {
     position: fixed;
     margin-top: @nav-bar-margin-top;
     
-    background-color: @nav-bar-background-color;
+    background: @nav-bar-background;
     color: @nav-bar-text-color;
     
     /* Box shadow */
@@ -174,4 +230,81 @@ a, a:visited {
 
 .indent {
     margin-left:2em;
+}
+
+@picture-edge-radius:15px;
+@picture-height:150px;
+@picture-width:150px;
+@picture-margin: 10px;
+
+.front-page-picture {
+    background-image: url("/static/images/kyle_49ers.png");
+    background-repeat: no-repeat;
+    background-position:top;
+    height: @picture-height;
+    width: @picture-width;
+    margin:auto;
+    margin-top:@picture-margin;
+    margin-bottom:@picture-margin;
+    -moz-border-radius: @picture-edge-radius;
+    border-radius: @picture-edge-radius;
+}
+
+@front-page-info-box-minor-text-size: 20px;
+@front-page-info-box-major-text-size: 30px;
+@front-page-info-box-line-spacing: 100%;
+@info-box-font-family: 'Chivo', sans-serif;
+
+.front-page-info-box {
+    text-align:center;
+    font-size: @front-page-info-box-minor-text-size;
+    font-family:@info-box-font-family;
+}
+
+.front-page-info-box > h1 {
+    font-size: @front-page-info-box-major-text-size;
+    line-height: @front-page-info-box-line-spacing;
+    font-weight:bold;
+}
+
+@front-page-link-box-major-text-size:30px;
+@front-page-link-box-minor-text-size:14px;
+@front-page-link-box-hover-background-color: #FFFFFF;
+@front-page-link-box-header-text-color: #1f518f;
+@front-page-link-box-subheader-text-color: #000000;
+@front-page-link-box-detail-text-color: #465055;
+@font-page-link-box-line-height:150%;
+@font-page-link-box-padding: 10px;
+
+.front-page-link-box {
+    
+}
+
+.front-page-link-box > div {
+    text-align:center;
+    padding:@font-page-link-box-padding;
+    font-family:'Chivo', sans-serif;
+    font-size:@front-page-link-box-minor-text-size;
+    line-height:@font-page-link-box-line-height;
+    color:@front-page-link-box-detail-text-color;
+}
+
+@front-page-link-box-shadow: 5px 5px 2px 2px #222;
+
+.front-page-link-box > div:hover {
+    background-color:@front-page-link-box-hover-background-color;
+    -moz-box-shadow: @front-page-link-box-shadow;
+    -webkit-box-shadow: @front-page-link-box-shadow;
+    box-shadow: @front-page-link-box-shadow;
+}
+
+.front-page-link-box > div > h1 {
+    font-size:@front-page-link-box-major-text-size;
+    font-weight:bold;
+    color: @front-page-link-box-header-text-color;
+}
+
+.front-page-link-box > div > h2 {
+    color: @front-page-link-box-subheader-text-color;
+    font-weight:bold;
 }

@@ -6,10 +6,39 @@
 {% endblock %}
 {% block content %}
     <div class="l-row">
-        <div class="l-column3 l-spacing1">
-            <p>Kyle Vermeer</p>
-            <p>Computer Science</p>
-            <p>Class of 2013</p>
+        <div class="l-split1">
+            <div class="front-page-info-box">
+                <h1>Kyle Vermeer</h1>
+                <div class="front-page-picture"></div>
+                <p>Computer Science</p>
+                <p>Class of 2013</p>
+            </div>
         </div>
+    </div>
+    <div class="l-row">
+        <a class="l-split3 front-page-link-box" href="/about">
+            <div>
+                <h1>About Me</h1>
+                <br/>
+                <h2>Interests and Activities</h2>
+                <p>From basketball to computing, learn more about me and what I like to do!  Information relevant to my resume can be found here!</p>
+            </div>
+        </a>
+        <a class="l-split3 front-page-link-box" href="/examples">
+            <div>
+                <h1>Examples</h1>
+                <br/>
+                <h2>Works from the past</h2>
+                <p>See some examples of projects I've worked on! Whether it be class projects or things I'm tinkering with, its here!</p>
+            </div>
+        </a>
+        <a class="l-split3 front-page-link-box" href="/blog">
+            <div>
+                <h1>Blog</h1>
+                <br/>
+                <h2>What's going on in my life</h2>
+                <p>Check out my blog!  The blog contains things about the development of my website, as well as important events in my life!</p>
+            </div>
+        </a>
     </div>
 {% endblock %}
