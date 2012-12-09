@@ -31,10 +31,16 @@ body {
     background: @background-color;
 }
 
+@content-spacing-from-nav-bar: 5px;
+
+#nav-bar-spacer {
+    margin-top:(@nav-bar-height + @content-spacing-from-nav-bar);
+}
+
 #content_container {
     margin:auto;
-    margin-top:20px;
     padding: 10px;
+    padding-top:20px;
     background: #D4D2C5;
     width: 50em;
     margin-bottom: 20px;
@@ -62,38 +68,66 @@ body {
 }
 
 /* Nav Bar */
-#nav_bar_container {
-    width:50em;
+
+@nav-bar-background-color: #65909A;
+@nav-bar-text-color: #FFFFFF;
+@nav-bar-shadow: 0px 0px 0px 0px #222;
+@nav-bar-height: 38px;
+@nav-bar-width: 100%;
+@nav-bar-margin-top: ((@nav-bar-height + @content-spacing-from-nav-bar)*-1);
+
+#l-nav-bar {
+    width:@nav-bar-width;
+    height:@nav-bar-height;
     margin:auto;
-    margin-top:5px;
-    text-align:center;
-    /* Box shadow */
-    -moz-box-shadow: 5px 5px 2px 2px #222;
-    -webkit-box-shadow: 5px 5px 2px 2px #222;
-    box-shadow: 5px 5px 2px 2px #222;
-    height:38px;
-    background-color: #333333;
-    opacity:0.9;
-    color: #FFFFFF;
-}
-
-#nav_bar_container ul {
-    padding-top:5px;
-}
-
-#nav_bar_container li {
+    position: fixed;
+    margin-top: @nav-bar-margin-top;
     
-    display:inline;
-    margin-top:10px;
-    margin-right:20px;
-    margin-left:20px;
+    background-color: @nav-bar-background-color;
+    color: @nav-bar-text-color;
+    
+    /* Box shadow */
+    -moz-box-shadow: @nav-bar-shadow;
+    -webkit-box-shadow: @nav-bar-shadow;
+    box-shadow: @nav-bar-shadow;
+    /* /Box Shadow */
+    
 }
 
-.nav_bar_link, .nav_bar_link:visited {
-    font-family: 'Orienta', sans-serif;
-    font-size: 1.2em;
-    color:#FFFFFF;
+#l-nav-bar > ul {
+    height: 100%;
 }
+
+@nav-bar-item-border: 1px solid #FFFFFF;
+@nav-bar-item-padding-top: 2px;
+@nav-bar-item-padding-right: 10px;
+@nav-bar-item-padding-left: 10px;
+@nav-bar-item-margin-top: 4px;
+
+#l-nav-bar > ul > li { 
+    display:inline-block;
+    padding-top:@nav-bar-item-padding-top;
+    padding-right:@nav-bar-item-padding-right;
+    padding-left:@nav-bar-item-padding-left;
+    margin-top: @nav-bar-item-margin-top;
+    border-right: @nav-bar-item-border;
+}
+
+@nav-bar-font-family: 'Orienta', sans-serif;
+@nav-bar-font-size: 18px;
+
+.nav-bar-link, .nav-bar-link:visited {
+    font-family: @nav-bar-font-family;
+    font-size: @nav-bar-font-size;
+    color:@nav-bar-text-color;
+}
+
+@nav-bar-hover-text-color: #000000;
+
+.nav-bar-link:hover {
+    color:@nav-bar-hover-text-color;
+}
+
 /* End Nav Bar */
 
 a, a:visited {

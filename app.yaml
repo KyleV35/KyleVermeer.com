@@ -14,7 +14,7 @@ handlers:
   upload: static/images/(.*)
   
 - url: /static/stylesheets
-  static_dir: static/stylesheets
+  static_dir: static/stylesheets/css
   
 - url: /static/javascripts
   static_dir: static/javascripts
