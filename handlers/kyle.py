@@ -29,3 +29,8 @@ class SaraPageHandler(BaseHandler):
     def get(self):
         template= jinja_environment.get_template('sara.html')
         self.response.out.write(template.render({}))
+        
+class AboutPageHandler(BaseHandler):
+    def get(self):
+        template= jinja_environment.get_template('about.html')
+        self.response.out.write(template.render({}))

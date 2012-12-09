@@ -27,11 +27,31 @@ html {
     background: @background-color;
 }
 
+@page-min-height: 600px;
+
 body {  
     background: @background-color;
+    min-height: @page-min-height;
 }
 
-@content-spacing-from-nav-bar: 5px;
+
+@row-width: 800px;
+
+.l-row {
+    width: @row-width;
+    margin: auto;
+}
+
+.l-column3 {
+    display: inline-block;
+    width: (@row-width * (3/8));
+}
+
+.l-spacing1 {
+    margin-left: (@row-width * (1/8));
+}
+
+@content-spacing-from-nav-bar: 25px;
 
 #nav-bar-spacer {
     margin-top:(@nav-bar-height + @content-spacing-from-nav-bar);

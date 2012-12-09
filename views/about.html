@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}About Kyle{% endblock %}
+{% block head %} {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/kyle.css" />
+    <meta name="description" content="The homepage for Kyle Vermeer" />
+{% endblock %}
+{% block content %}
+<div id="content_container">
+    <div id="front_page_image"><img  src="/static/images/KyleVermeer.jpg" alt="Kyle Vermeer"></img><div></div></div>
+    <p class="center_text emphasize">&nbspWelcome to Kyle Vermeer's personal website!</p>
+    <div id="about_kyle">
+        <p class="center_text section_heading">About Kyle</p>
+        <p class="justify_text"> My name is Kyle Manuel Gonzalez Vermeer and I am a senior at Stanford University.
+        I am currently studying Computer Science and I plan to graduate with a B.S. in the spring. After graduation,
+        I would love to do work on cool new mobile or web applications.  I plan to stay around the Bay Area, but 
+        wouldn't be opposed to seeing more of the world.  After working in industry, I would love nothing more than
+        to teach and coach basketball at my high school, <a href="http://www.bcp.org">Bellarmine College Preparatory</a>.</p>
+        <br/>
+        <p class="center_text section_heading">Hobbies</p>
+        <p class="justify_text">One of my favorite activities has always been basketball. At Stanford, I am a captain
+        on the Men's Club Basketball Team.  I can often be found playing pick-up basketball on the courts at Stanford.
+        When I'm not playing basketball, I try to explore web and mobile programming.  Under the <a href="/examples">examples</a> link
+        in the navigation bar, you can see some of the work I have done in and out of class!  I also enjoy watching bad
+        TV shows like Big Brother.</p>
+        <br/>
+        <p class="center_text section_heading">Work History</p>
+        <p class="justify_text">
+        <ul>
+            <li>Summer 2012: <a href="http://www.udacity.com">Udacity, Inc.</a>
+                <p class="indent">I worked on implementing a site-wide search as well as developing a next-generation 
+                mobile app.</p>
+            </li>
+            <li>Summer 2011: <a href="http://www.nasa.gov">NASA Ames Research Center</a>
+                <p class="indent">I worked on implementing an AES encryption system for research data. </p>
+            </li>
+            <li>Summer 2010: <a href="http://www.nasa.gov">NASA Ames Research Center</a>
+                <p class="indent">I analyzed data gathered from many runs of a computer simulation of the Direct-To air traffic control
+                system to show its effects on flight arrival time. </p>
+            </li>
+        </ul>
+        </p>
+        <br/>
+        <p class="center_text section_heading">Technical Skills</p>
+        <p class="justify_text">Strongest Skills: HTML, CSS, Javascript, Python, Objective C. </p>
+        <p class="justify_text">Familiarity With: PHP, JQuery, JQuery Mobile, AJAX, Java, C++, C, Ruby, Ruby on Rails. </p>
+        </p>
+    </div>
+</div>
+{% endblock %}
