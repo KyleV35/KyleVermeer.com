@@ -18,6 +18,9 @@ routes= [
         webapp2.Route(r'/brickbreaker/highScore',handler='handlers.games.BrickBreakerHighScoresHandler'),
         webapp2.Route(r'/brickbreaker/init',handler='handlers.games.BrickBreakerInitHandler'),
     ]),
+    routes.PathPrefixRoute(r'/blog', [
+        webapp2.Route(r'/create_new',handler='handlers.kyle.NewBlogPostHandler'),
+    ]),
     webapp2.Route(r'/family',handler='handlers.family.FamilyMainPageHandler'),
     webapp2.Route(r'/family/member/<familyMemberName>', handler='handlers.family.FamilyHandler'),
     routes.PathPrefixRoute(r'/family/videos', [

@@ -9,6 +9,7 @@ from google.appengine.api import memcache
 from util.memcacheHelper import safeMemcacheSet
 from util.template import jinja_environment
 from models.games import BrickBreakerTopScore
+from models.blog import BlogPost
 
 class FrontPageHandler(BaseHandler):
     def get(self):
@@ -39,3 +40,27 @@ class WhatsUpHandler(BaseHandler):
     def get(self):
         template= jinja_environment.get_template('examples/whats_up.html')
         self.response.out.write(template.render({}))
+        
+class NewBlogPostHandler(BaseHandler):
+    def get(self):
+        template= jinja_environment.get_template('create_blog_post.html')
+        self.response.out.write(template.render({}))
+    def post(self):
+        title = self.request.get("title")
+        #logging.info("Title: " + title) 
+        author = self.request.get("author")
+        #logging.info("Author: " + author)
+        body = self.request.get("body")
+        #logging.info("Body: " + body)
+        password = self.request.get("password")
+        #logging.info("Password: " + password)
+        blog_post_number_query = BlogPost.all(keys_only=True)
+        num_blog_posts = blog_post_number_query.count()
+        new_blog_post_num = str(num_blog_posts+1)
+        new_key_name = "BlogPost" + new_blog_post_num
+        #logging.info("New Blog Post Num: " + new_blog_post_num)
+        #logging.info("New Key Name: " + new_key_name)
+        new_blog_post = BlogPost(author=author,title=title,body=body, key_name= new_key_name)
+        new_blog_post.put()
+        self.response.out.write("")
+        return webapp2.redirect('/blog')
