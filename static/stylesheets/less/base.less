@@ -23,6 +23,10 @@ time, mark, audio, video {
 	list-style:none;
 }
 
+i {
+    font-style: italic;
+}
+
 @background: #fefbf0 url('/static/images/background.png') repeat center;
 
 html {
@@ -269,44 +273,57 @@ a, a:visited {
     font-weight:bold;
 }
 
-@front-page-link-box-major-text-size:30px;
-@front-page-link-box-minor-text-size:14px;
-@front-page-link-box-hover-background-color: #FFFFFF;
-@front-page-link-box-header-text-color: #1f518f;
-@front-page-link-box-subheader-text-color: #000000;
-@front-page-link-box-detail-text-color: #465055;
-@font-page-link-box-line-height:150%;
-@font-page-link-box-padding: 10px;
+@link-box-major-text-size:30px;
+@link-box-minor-text-size:14px;
+@link-box-hover-background-color: #FFFFFF;
+@link-box-header-text-color: #1f518f;
+@link-box-subheader-text-color: #000000;
+@link-box-detail-text-color: #465055;
+@link-box-line-height:150%;
+@link-box-padding: 10px;
 
-.front-page-link-box {
+.link-box {
     
 }
 
-.front-page-link-box > div {
+.link-box > div {
     text-align:center;
-    padding:@font-page-link-box-padding;
+    padding:@link-box-padding;
     font-family:'Chivo', sans-serif;
-    font-size:@front-page-link-box-minor-text-size;
-    line-height:@font-page-link-box-line-height;
-    color:@front-page-link-box-detail-text-color;
+    font-size:@link-box-minor-text-size;
+    line-height:@link-box-line-height;
+    color:@link-box-detail-text-color;
 }
 
-@front-page-link-box-shadow: 5px 5px 2px 2px #222;
+@link-box-shadow: 5px 5px 2px 2px #222;
 
-.front-page-link-box > div:hover {
-    background-color:@front-page-link-box-hover-background-color;
-    -moz-box-shadow: @front-page-link-box-shadow;
-    -webkit-box-shadow: @front-page-link-box-shadow;
-    box-shadow: @front-page-link-box-shadow;
+.link-box > div:hover {
+    background-color:@link-box-hover-background-color;
+    -moz-box-shadow: @link-box-shadow;
+    -webkit-box-shadow: @link-box-shadow;
+    box-shadow: @link-box-shadow;
 }
 
-.front-page-link-box > div > h1 {
-    font-size:@front-page-link-box-major-text-size;
+@link-box-header-bottom-padding: 20px;
+
+.link-box > div > h1 {
+    font-size:@link-box-major-text-size;
     font-weight:bold;
-    color: @front-page-link-box-header-text-color;
+    color: @link-box-header-text-color;
+    padding-bottom: @link-box-header-bottom-padding;
 }
 
-.front-page-link-box > div > h2 {
-    color: @front-page-link-box-subheader-text-color;
+.link-box > div > h2 {
+    color: @link-box-subheader-text-color;
     font-weight:bold;
+}
+
+.text-center {
+    text-align:center;
+}
+
+@instruction-list-indent: 15px;
+
+.instruction-list > li {
+    padding-left:@instruction-list-indent;
 }

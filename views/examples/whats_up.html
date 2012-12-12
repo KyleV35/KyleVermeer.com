@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}What's Up{% endblock %}
+{% block head %} {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/stylesheets/kyle.css" />
+{% endblock %}
+{% block content %}
+    <div class="l-row">
+        <h1 class="page-header">What's Up</h1>
+    </div>
+    <div class="l-row">
+            <img class="example_image" src="/static/images/WhatsUpLogo.png" alt="What's Up Logo"></img>
+            <h1 class="section-header">Description</h1>
+            <p class="section-body">What's Up is a mobile web app developed by Kyle and two other Stanford students in their <i>CS147: Introduction to Human-Computer Interaction</i> class aimed at organizing and consolidating news from many sources.  Kyle did the majority of the technical development for the app, whereas his partners took lead roles in the visual design and flow of the app.  The app is powered by JQuery Mobile with a PHP backend.  While the app can be viewed on the web, the purpose of the app is to be used on a smart phone, specifically the iPhone.</p>
+            <div class="section-body">
+                To access the app as a mobile web app:
+                <ol class="instruction-list">
+                    <li>1. Go the website provided below on the Safari browser on the iPhone. </li>
+                    <li>2. Once on the login page of the site, use the menu at the bottom of the browser to add the site to the home 
+                    screen.  This should place the app on your phone. </li>
+                    <li>3. Click the app on your iPhone home screen and start viewing your news!</li>
+                </ol></p>
+            </div>
+            <p class="section-body"> This project can be found <a href="http://stanford.edu/~kvermeer/cgi-bin/CS147Project/views/mobile.php"> here</a>.</p>
+    </div>
+{% endblock %}

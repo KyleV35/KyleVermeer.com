@@ -34,3 +34,8 @@ class AboutPageHandler(BaseHandler):
     def get(self):
         template= jinja_environment.get_template('about.html')
         self.response.out.write(template.render({}))
+        
+class WhatsUpHandler(BaseHandler):
+    def get(self):
+        template= jinja_environment.get_template('examples/whats_up.html')
+        self.response.out.write(template.render({}))

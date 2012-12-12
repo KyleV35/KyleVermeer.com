@@ -8,6 +8,9 @@ routes= [
     webapp2.Route(r'/about',handler='handlers.kyle.AboutPageHandler'),
     webapp2.Route(r'/sara',handler='handlers.kyle.SaraPageHandler'),
     webapp2.Route(r'/examples',handler='handlers.kyle.KyleExamplesHandler'),
+    routes.PathPrefixRoute(r'/examples', [
+        webapp2.Route(r'/whats_up',handler='handlers.kyle.WhatsUpHandler'),
+    ]),
     webapp2.Route(r'/contact',handler='handlers.kyle.ContactPageHandler'),
     webapp2.Route(r'/games',handler='handlers.games.GamesPageHandler'),
     routes.PathPrefixRoute(r'/games', [
