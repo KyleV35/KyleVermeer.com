@@ -46,5 +46,70 @@
     height:@blog-post-input-height; 
 }
 
+@blog-post-background-color: #FFFFFF;
+@blog-post-opacity: 1;
+@blog-post-width: 700px;
+@blog-post-shadow: 7px 7px 5px 5px #222;
+@blog-post-inner-shadow: inset 0 0px 20px 20px #FFFFFF;
+@blog-post-padding: 20px;
+@blog-post-margin-bottom: 30px;
+
+.l-blog-post {
+    background-color: @blog-post-background-color;
+    opacity: @blog-post-opacity;
+    width: @blog-post-width;
+    -moz-box-shadow: @blog-post-shadow, @blog-post-inner-shadow;
+    -webkit-box-shadow: @blog-post-shadow, @blog-post-inner-shadow;
+    box-shadow: @blog-post-shadow, @blog-post-inner-shadow;
+    padding: @blog-post-padding;
+    font-family: @font-family;
+    margin-bottom: @blog-post-margin-bottom;
+}
+
+@blog-title-font-size:20px;
+@blog-title-font-color: #1D77BC;
+
+.blog-title {
+    font-size: @blog-title-font-size;
+    color: @blog-title-font-color;
+}
+
+@blog-author-font-size: 12px;
+@blog-author-font-color: #000000;
+
+.blog-author {
+    font-size: @blog-author-font-size;
+    color: @blog-author-font-color;
+}
+
+@blog-date-font-size: 12px;
+@blog-date-font-color: #000000;
+
+.blog-date {
+    font-size: @blog-date-font-size;
+    color: @blog-date-font-color;
+}
+
+@blog-body-font-size: 14px;
+@blog-body-font-color: #000000;
+@blog-body-line-height:150%;
+@blog-body-paragraph-padding: 20px;
+
+.l-blog-post-body > p {
+    font-size: @blog-body-font-size;
+    color: @blog-date-font-color;
+    line-height: @blog-body-line-height;
+    padding-bottom: @blog-body-paragraph-padding;
+}
+
+@blog-post-header-bottom-border: 3px solid #00BFFF;
+@blog-post-header-bottom-padding: 5px;
+@blog-post-header-bottom-margin: 25px;
+
+.l-blog-post-header {
+    border-bottom: @blog-post-header-bottom-border;
+    padding-bottom: @blog-post-header-bottom-padding;
+    margin-bottom: @blog-post-header-bottom-margin;
+}
 
 

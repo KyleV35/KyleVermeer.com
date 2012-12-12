@@ -46,6 +46,10 @@ class NewBlogPostHandler(BaseHandler):
         template= jinja_environment.get_template('create_blog_post.html')
         self.response.out.write(template.render({}))
     def post(self):
+        #logging.info("Referer: " +self.request.referer)
+        #Check referer to prevent CSRF
+        if self.request.referer != "http://localhost:8081/blog/create_new":
+            return webapp2.redirect('/about')
         title = self.request.get("title")
         #logging.info("Title: " + title) 
         author = self.request.get("author")
@@ -53,6 +57,8 @@ class NewBlogPostHandler(BaseHandler):
         body = self.request.get("body")
         #logging.info("Body: " + body)
         password = self.request.get("password")
+        if password != "betsy says post":
+            return webapp2.redirect('/blog')
         #logging.info("Password: " + password)
         blog_post_number_query = BlogPost.all(keys_only=True)
         num_blog_posts = blog_post_number_query.count()
@@ -64,3 +70,12 @@ class NewBlogPostHandler(BaseHandler):
         new_blog_post.put()
         self.response.out.write("")
         return webapp2.redirect('/blog')
+        
+class BlogHandler(BaseHandler):
+    def get(self):
+        blog_posts = BlogPost.all()
+        template_values = {
+            "blog_posts" : blog_posts
+        }
+        template= jinja_environment.get_template('blog.html')
+        self.response.out.write(template.render(template_values))
