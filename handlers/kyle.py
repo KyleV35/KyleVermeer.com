@@ -48,7 +48,7 @@ class NewBlogPostHandler(BaseHandler):
     def post(self):
         #logging.info("Referer: " +self.request.referer)
         #Check referer to prevent CSRF
-        if self.request.referer != "http://localhost:8081/blog/create_new":
+        if self.request.referer != "http://www.kylevermeer.com/blog/create_new":
             return webapp2.redirect('/about')
         title = self.request.get("title")
         #logging.info("Title: " + title) 
