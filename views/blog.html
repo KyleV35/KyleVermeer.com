@@ -7,7 +7,6 @@
     <div class="l-row">
         <h1 class="page-header">Kyle's Blog</h1>
     </div>
-    {% for blog_post in blog_posts %}
         <div class="l-row">
             <div class="l-blog-post">
                 <div class="l-blog-post-header">
@@ -20,7 +19,6 @@
                 </div>
             </div>
          </div>
-    {% endfor %}
         {% if blog_posts is none %}
             <div class="l-row">
                 <p>No blog posts!</p>

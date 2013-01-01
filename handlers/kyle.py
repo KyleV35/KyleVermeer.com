@@ -48,8 +48,8 @@ class NewBlogPostHandler(BaseHandler):
     def post(self):
         #logging.info("Referer: " +self.request.referer)
         #Check referer to prevent CSRF
-        if self.request.referer != "http://www.kylevermeer.com/blog/create_new":
-            return webapp2.redirect('/about')
+        #if self.request.referer != "http://www.kylevermeer.com/blog/create_new":
+        #    return webapp2.redirect('/about')
         title = self.request.get("title")
         #logging.info("Title: " + title) 
         author = self.request.get("author")
@@ -73,9 +73,9 @@ class NewBlogPostHandler(BaseHandler):
         
 class BlogHandler(BaseHandler):
     def get(self):
-        blog_posts = BlogPost.all()
+        blog_post = BlogPost.all().order('-date').get()
         template_values = {
-            "blog_posts" : blog_posts
+            "blog_post" : blog_post
         }
         template= jinja_environment.get_template('blog.html')
         self.response.out.write(template.render(template_values))
