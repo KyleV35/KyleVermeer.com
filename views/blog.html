@@ -8,6 +8,14 @@
         <h1 class="page-header">Kyle's Blog</h1>
     </div>
         <div class="l-row">
+            {% if blog_post.previous is not none %}
+                <a href="/blog/{{blog_post.previous.year}}/{{blog_post.previous.month}}/{{blog_post.previous.day}}">Previous</a>
+            {% endif %}
+            {% if blog_post.next is not none %}
+                <a href="/blog/{{blog_post.next.year}}/{{blog_post.next.month}}/{{blog_post.next.day}}">Next</a>
+            {% endif %}
+        </div>
+        <div class="l-row">
             <div class="l-blog-post">
                 <div class="l-blog-post-header">
                     <h1 class="blog-title">{{blog_post.title}}</h1>

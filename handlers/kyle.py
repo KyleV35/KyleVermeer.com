@@ -45,37 +45,60 @@ class NewBlogPostHandler(BaseHandler):
     def get(self):
         template= jinja_environment.get_template('create_blog_post.html')
         self.response.out.write(template.render({}))
+        
     def post(self):
-        #logging.info("Referer: " +self.request.referer)
         #Check referer to prevent CSRF
-        #if self.request.referer != "http://www.kylevermeer.com/blog/create_new":
-        #    return webapp2.redirect('/about')
-        title = self.request.get("title")
-        #logging.info("Title: " + title) 
+        if self.request.referer != "http://www.kylevermeer.com/blog/create_new":
+            return webapp2.redirect('/about')
+        title = self.request.get("title") 
         author = self.request.get("author")
-        #logging.info("Author: " + author)
         body = self.request.get("body")
-        #logging.info("Body: " + body)
         password = self.request.get("password")
+        
+        #Check password
         if password != "betsy says post":
             return webapp2.redirect('/blog')
-        #logging.info("Password: " + password)
+            
+        
         blog_post_number_query = BlogPost.all(keys_only=True)
         num_blog_posts = blog_post_number_query.count()
         new_blog_post_num = str(num_blog_posts+1)
         new_key_name = "BlogPost" + new_blog_post_num
-        #logging.info("New Blog Post Num: " + new_blog_post_num)
-        #logging.info("New Key Name: " + new_key_name)
+        
+        #Find last blog post to set up linked list
+        last_blog_post = BlogPost.get_by_key_name("BlogPost"+str(num_blog_posts))
         new_blog_post = BlogPost(author=author,title=title,body=body, key_name= new_key_name)
+        
+        #If this is first blog post
+        if last_blog_post is None:
+            new_blog_post.next = None
+        else :
+            last_blog_post.previous = new_blog_post.key()
+            last_blog_post.put()
+            new_blog_post.next = last_blog_post.key()
+        new_blog_post.previous = None
         new_blog_post.put()
         self.response.out.write("")
         return webapp2.redirect('/blog')
         
-class BlogHandler(BaseHandler):
+class BlogHandlerLatest(BaseHandler):
     def get(self):
-        blog_post = BlogPost.all().order('-date').get()
-        template_values = {
-            "blog_post" : blog_post
-        }
-        template= jinja_environment.get_template('blog.html')
-        self.response.out.write(template.render(template_values))
+        self.response.out.write(create_blog_post_response())
+        
+class BlogHandler(BaseHandler):
+    def get(self,year,month,day):
+        self.response.out.write(create_blog_post_response(year,month,day))
+        
+        
+def create_blog_post_response(year = None,month = None,day = None):
+    blog_post_query = BlogPost.all().order('-date')
+    if year is not None:
+        blog_post_query.filter('year =',long(year))
+        blog_post_query.filter('month =',long(month))
+        blog_post_query.filter('day =',long(day))
+    blog_post = blog_post_query.get()
+    template_values = {
+        "blog_post" : blog_post
+    }
+    template= jinja_environment.get_template('blog.html')
+    return template.render(template_values)

@@ -9,6 +9,17 @@ class BlogPost(db.Model):
     date = db.DateTimeProperty(auto_now_add=True)
     title = db.StringProperty()
     body= db.TextProperty()
+    previous = db.SelfReferenceProperty(collection_name="previous_set")
+    next = db.SelfReferenceProperty(collection_name="next_set")
+    @db.ComputedProperty
+    def year(self):
+        return self.date.year
+    @db.ComputedProperty
+    def month(self):
+        return self.date.month
+    @db.ComputedProperty
+    def day(self):
+        return self.date.day
     
     def get_formatted_date(self):
         unformatted_date= self.date
@@ -28,3 +39,7 @@ class BlogPost(db.Model):
         #body_html = body_html + "</p>"
         logging.info(body_html)
         return body_html
+        
+    @staticmethod
+    def get_most_recent():
+        return BlogPost.all().order('-date').get()
