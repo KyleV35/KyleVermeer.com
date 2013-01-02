@@ -14,6 +14,15 @@ indexes:
   properties:
   - name: day
   - name: month
+  - name: title
+  - name: year
+  - name: date
+    direction: desc
+
+- kind: BlogPost
+  properties:
+  - name: day
+  - name: month
   - name: year
   - name: date
     direction: desc

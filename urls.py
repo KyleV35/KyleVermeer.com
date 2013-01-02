@@ -29,7 +29,7 @@ routes= [
     webapp2.Route(r'/blog',handler='handlers.kyle.BlogHandlerLatest'),
     routes.PathPrefixRoute(r'/blog', [
         webapp2.Route(r'/',handler='handlers.kyle.BlogHandler'),
-        webapp2.Route(r'/<year>/<month>/<day>',handler='handlers.kyle.BlogHandler'),       
+        webapp2.Route(r'/<year>/<month>/<day>/<title>',handler='handlers.kyle.BlogHandler'),       
         webapp2.Route(r'/create_new',handler='handlers.kyle.NewBlogPostHandler'),
     ]),
     

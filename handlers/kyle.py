@@ -1,6 +1,7 @@
 import webapp2
 import logging
 import datetime
+from urllib import unquote_plus
 from handlers.base_handler import BaseHandler
 from webapp2_extras import json
 from models.familyMember import *
@@ -48,8 +49,8 @@ class NewBlogPostHandler(BaseHandler):
         
     def post(self):
         #Check referer to prevent CSRF
-        if self.request.referer != "http://www.kylevermeer.com/blog/create_new":
-            return webapp2.redirect('/about')
+        #if self.request.referer != "http://www.kylevermeer.com/blog/create_new":
+        #    return webapp2.redirect('/about')
         title = self.request.get("title") 
         author = self.request.get("author")
         body = self.request.get("body")
@@ -86,16 +87,17 @@ class BlogHandlerLatest(BaseHandler):
         self.response.out.write(create_blog_post_response())
         
 class BlogHandler(BaseHandler):
-    def get(self,year,month,day):
-        self.response.out.write(create_blog_post_response(year,month,day))
+    def get(self,year,month,day,title):
+        self.response.out.write(create_blog_post_response(year,month,day,title))
         
         
-def create_blog_post_response(year = None,month = None,day = None):
+def create_blog_post_response(year = None,month = None,day = None,title = None):
     blog_post_query = BlogPost.all().order('-date')
     if year is not None:
         blog_post_query.filter('year =',long(year))
         blog_post_query.filter('month =',long(month))
         blog_post_query.filter('day =',long(day))
+        blog_post_query.filter('title =',unquote_plus(title))
     blog_post = blog_post_query.get()
     template_values = {
         "blog_post" : blog_post

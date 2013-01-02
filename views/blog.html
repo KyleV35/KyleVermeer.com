@@ -8,12 +8,15 @@
         <h1 class="page-header">Kyle's Blog</h1>
     </div>
         <div class="l-row">
-            {% if blog_post.previous is not none %}
-                <a href="/blog/{{blog_post.previous.year}}/{{blog_post.previous.month}}/{{blog_post.previous.day}}">Previous</a>
-            {% endif %}
-            {% if blog_post.next is not none %}
-                <a href="/blog/{{blog_post.next.year}}/{{blog_post.next.month}}/{{blog_post.next.day}}">Next</a>
-            {% endif %}
+            <div class="l-blog-nav-bar">
+                {% if blog_post.previous is not none %}
+                    <a id="previous-link" href="/blog/{{blog_post.previous.year}}/{{blog_post.previous.month}}/{{blog_post.previous.day}}/{{urlencode(blog_post.previous.title)}}"><span class="arrows">&lt;&lt;</span>Previous Article: {{blog_post.previous.title}}</a>
+                {% endif %}
+                {% if blog_post.next is not none %}
+                    <a id="next-link" href="/blog/{{blog_post.next.year}}/{{blog_post.next.month}}/{{blog_post.next.day}}/{{urlencode(blog_post.next.title)}}">Next Article: {{blog_post.next.title}}<span class="arrows">&gt;&gt;</span></a>
+                {% endif %}
+                <div class="space_holder"></div>
+            </div>
         </div>
         <div class="l-row">
             <div class="l-blog-post">
