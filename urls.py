@@ -40,5 +40,8 @@ routes= [
         webapp2.Route(r'/display',handler='handlers.family.VideoHandler'),
         webapp2.Route(r'/like',handler='handlers.family.VideoLikeHandler'), #Ajax handler
     ]),
-    webapp2.Route(r'/family/makedummydata', handler='handlers.family.DummyData')
+    webapp2.Route(r'/family/makedummydata', handler='handlers.family.DummyData'),
+    
+    #Book Reviews
+    webapp2.Route(r'/reviews',handler='handlers.book_reviews_handler.BookReviewHandler')
     ]

@@ -69,6 +69,26 @@ body {
     width: (@row-width * (3/8));
 }
 
+.l-column4 {
+    display: inline-block;
+    width: (@row-width * (4/8));
+}
+
+.l-column5 {
+    display: inline-block;
+    width: (@row-width * (5/8));
+}
+
+.l-column6 {
+    display: inline-block;
+    width: (@row-width * (6/8));
+}
+
+.l-column7 {
+    display: inline-block;
+    width: (@row-width * (7/8));
+}
+
 .l-split1 {
     display: inline-block;
     width: (@row-width);
@@ -326,4 +346,10 @@ a, a:visited {
     line-height: @arrows-line-height;
     margin-left: @arrows-side-margin;
     margin-right: @arrows-side-margin;
+}
+
+@indent-size: 15px;
+
+.indent {
+    margin-left:@indent-size;
 }

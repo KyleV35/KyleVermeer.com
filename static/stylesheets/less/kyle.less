@@ -38,6 +38,17 @@
     margin-bottom: @page-header-margin-bottom;
 }
 
+@page-header-subtitle-font-size: 15px;
+@page-header-subtitle-font-color: #000000;
+@page-header-shift-up: 20px;
+
+.page-header-subtitle {
+    font-family: @font-family;
+    font-size: @page-header-subtitle-font-size;
+    color: @page-header-subtitle-font-color;
+    margin-top: (-1 *@page-header-shift-up);
+}
+
 @blog-post-input-width: 500px;
 @blog-post-input-height: 250px;
 
@@ -124,6 +135,18 @@
 
 #next-link {
     float:right;
+}
+
+@book-message-font-size: 30px;
+@book-message-font-color: #000000;
+@book-message-text-align: center;
+
+.book-message {
+    font-family: @font-family;
+    font-size: @book-message-font-size;
+    color: @book-message-font-color;
+    text-align: @book-message-text-align;
+    padding-bottom: @section-body-padding-bottom;
 }
 
 
